@@ -5,6 +5,8 @@
 #include <cstdlib>
 using namespace std; 
 
+//Solving portion done by Grant Williams
+//This method searches for any empty spots in the puzzle
 bool foundEmpty(int mat[9][9], int &row, int &col)
 {
 	for ( row = 0; row < 9; row++) {
@@ -17,6 +19,7 @@ bool foundEmpty(int mat[9][9], int &row, int &col)
 	return false;
 }
 
+//This method check if a certain int is anywhere in the given row
 bool inRow(int mat[9][9], int r, int check)
 {
 	for (int c = 0; c < 9; c++) {
@@ -27,6 +30,7 @@ bool inRow(int mat[9][9], int r, int check)
 	return false;
 }
 
+//This method checks if a certain int is anywhere in the given column
 bool inCol(int mat[9][9], int c, int check)
 {
 	for (int r = 0; r < 9; r++) {
@@ -37,6 +41,7 @@ bool inCol(int mat[9][9], int c, int check)
 	return false;
 }
 
+//This method checks if a certain int is anywhere within a 3x3 block in the puzzle, given a starting column and row
 bool inBox(int mat[9][9], int rstart, int cstart, int check)
 {
 	for (int r = 0; r < 3; r++) {
@@ -49,6 +54,7 @@ bool inBox(int mat[9][9], int rstart, int cstart, int check)
 	return false;
 }
 
+//This method uses the 3 checking methods to ensure a given int is in a legal spot in the puzzle
 bool isLegal(int mat[9][9], int row, int col, int check)
 {
 	if (inRow(mat, row, check) || inCol(mat, col, check)
@@ -62,6 +68,7 @@ bool isLegal(int mat[9][9], int row, int col, int check)
 	}
 }
 
+//This method uses all above methods to solve the sudoku puzzle
 bool isSolved(int mat[9][9])
 {
 	int row, col;
