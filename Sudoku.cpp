@@ -5,6 +5,10 @@
 #include <cstdlib>
 using namespace std; 
 
+//Shouldn't these constant global variables be here? - Edgar
+const int col = 9;
+const int row = 9;
+
 //Solving portion done by Grant Williams
 //This method searches for any empty spots in the puzzle
 bool foundEmpty(int mat[9][9], int &row, int &col)
@@ -103,7 +107,43 @@ void printSudoku(int mat[9][9])
 //Needs to read in text files as input instead of hardcoded puzzles
 void main()
 {
-	int puzz[9][9] = 
+	ifstream inFile;
+
+	inFile.open("samplesudoku1.txt");
+
+	//Check for error
+	if (inFile.fail())
+	{
+		cerr << "Error opening file" << endl;
+		exit(1);
+	}
+
+	int puzzTxt[row][col];
+
+	//Loop through the file
+	while (!inFile.eof())
+	{
+		for (int i = 0; i < row; i++)
+		{
+			for (int j = 0; j < col; j++)
+			{
+				inFile >> puzzTxt[i][j];
+			}
+				
+		}
+	}
+	
+	//Prints the text file 9x9
+	for (int i = 0; i < row; i++)
+	{
+		for (int j = 0; j < col; j++)
+		{
+			cout << puzzTxt[i][j];
+		}
+		cout << endl;
+	}
+
+	/*int puzz[9][9] = 
 	{ { 3, 0, 6, 5, 0, 8, 4, 0, 0 },
 	{ 5, 2, 0, 0, 0, 0, 0, 0, 0 },
 	{ 0, 8, 7, 0, 0, 0, 0, 3, 1 },
@@ -113,9 +153,11 @@ void main()
 	{ 1, 3, 0, 0, 0, 0, 2, 5, 0 },
 	{ 0, 0, 0, 0, 0, 0, 0, 7, 4 },
 	{ 0, 0, 5, 2, 0, 6, 3, 0, 0 } };
-	if (isSolved(puzz) == true)
+	*/
+	
+	if (isSolved(puzzTxt) == true)
 	{
-		printSudoku(puzz);
+		printSudoku(puzzTxt);
 	}
 	else
 	{
