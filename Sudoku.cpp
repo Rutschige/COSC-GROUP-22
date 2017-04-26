@@ -173,5 +173,8 @@ void main()
 	{
 		cout << "No Solution" << endl;
 	}
+	
+	inFile.close();
+	
 	system("pause");	
 }
