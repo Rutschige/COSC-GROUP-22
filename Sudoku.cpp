@@ -161,16 +161,30 @@ void main()
 		}
 	}
 	
-	/*
-	//Prints the text file 9x9
-	for (int i = 0; i < row; i++)
+	for (int i = 0; i <= 8; i++)
 	{
-		for (int j = 0; j < col; j++)
+		for (int j = 0; j <= 8; j++)
+			{
+				cout << "|   ";
+			}
+
+		cout << "|" << endl;
+
+		for (int j = 0; j <= 8; j++)
 		{
-			cout << puzzTxt[i][j] << " ";
+			cout << "| " << puzzTxt[i][j] << " ";
 		}
-		cout << endl;
-	}*/
+
+		cout << "|" << endl;
+
+		for (int j = 0; j <= 8; j++)
+		{
+			cout << "|___";
+		}
+
+		cout << "|" << endl;
+
+	}
 
 	if (isSolved(puzzTxt) == true)
 	{
