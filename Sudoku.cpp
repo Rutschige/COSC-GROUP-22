@@ -161,30 +161,9 @@ void main()
 		}
 	}
 	
-	for (int i = 0; i <= 8; i++)
-	{
-		for (int j = 0; j <= 8; j++)
-			{
-				cout << "|   ";
-			}
-
-		cout << "|" << endl;
-
-		for (int j = 0; j <= 8; j++)
-		{
-			cout << "| " << puzzTxt[i][j] << " ";
-		}
-
-		cout << "|" << endl;
-
-		for (int j = 0; j <= 8; j++)
-		{
-			cout << "|___";
-		}
-
-		cout << "|" << endl;
-
-	}
+	//prints before being solved
+	printSudoku(puzzTxt);
+	cout << endl;
 
 	if (isSolved(puzzTxt) == true)
 	{
