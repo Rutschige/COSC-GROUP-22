@@ -113,8 +113,14 @@ void printSudoku(int mat[9][9])
 		
 		for (int j = 0; j <= 8; j++)
 		{
-			
+			if(mat[i][j] == 0)
+			{
+				cout << "|   ";
+			}
+			else
+			{
 			cout << "| " << mat[i][j] << " ";
+			}
 
 		}
 	
