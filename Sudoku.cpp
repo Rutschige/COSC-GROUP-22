@@ -5,7 +5,6 @@
 #include <cstdlib>
 using namespace std; 
 
-//Shouldn't these constant global variables be here? - Edgar
 const int col = 9;
 const int row = 9;
 
@@ -98,7 +97,7 @@ bool isSolved(int mat[9][9])
 	return false;
 }
 
-//Needs tp print out sudoku grid instead of "solved" // This part was done be Amanda Foster
+// This part was done be Amanda Foster
 void printSudoku(int mat[9][9])
 {
 	for (int i = 0; i <= 8; i++)
@@ -133,7 +132,6 @@ void printSudoku(int mat[9][9])
 	}
 }
 
-//Needs to read in text files as input instead of hardcoded puzzles
 void main()
 {
 	//Reading from text portion by Edgar Garza
@@ -163,6 +161,7 @@ void main()
 		}
 	}
 	
+	/*
 	//Prints the text file 9x9
 	for (int i = 0; i < row; i++)
 	{
@@ -171,20 +170,8 @@ void main()
 			cout << puzzTxt[i][j] << " ";
 		}
 		cout << endl;
-	}
+	}*/
 
-	/*int puzz[9][9] = 
-	{ { 3, 0, 6, 5, 0, 8, 4, 0, 0 },
-	{ 5, 2, 0, 0, 0, 0, 0, 0, 0 },
-	{ 0, 8, 7, 0, 0, 0, 0, 3, 1 },
-	{ 0, 0, 3, 0, 1, 0, 0, 8, 0 },
-	{ 9, 0, 0, 8, 6, 3, 0, 0, 5 },
-	{ 0, 5, 0, 0, 9, 0, 6, 0, 0 },
-	{ 1, 3, 0, 0, 0, 0, 2, 5, 0 },
-	{ 0, 0, 0, 0, 0, 0, 0, 7, 4 },
-	{ 0, 0, 5, 2, 0, 6, 3, 0, 0 } };
-	*/
-	
 	if (isSolved(puzzTxt) == true)
 	{
 		printSudoku(puzzTxt);
