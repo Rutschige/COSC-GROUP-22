@@ -98,10 +98,39 @@ bool isSolved(int mat[9][9])
 	return false;
 }
 
-//Needs tp print out sudoku grid instead of "solved"
+//Needs tp print out sudoku grid instead of "solved" // This part was done be Amanda Foster
 void printSudoku(int mat[9][9])
 {
-	cout << "solved" << endl;
+	for (int i = 0; i <= 8; i++)
+	{
+		for (int j = 0; j <= 8; j++)
+		{
+			
+			cout << "|   " ;
+			
+		}
+		cout << "|" << endl;
+		
+		for (int j = 0; j <= 8; j++)
+		{
+			
+			cout << "| " << mat[i][j] << " ";
+
+		}
+	
+		
+		cout<< "|" << endl;
+
+		for (int j = 0; j <= 8; j++)
+		{
+			system("color F0");
+			cout << "|___";
+
+		}
+		
+		cout << "|" << endl;
+
+	}
 }
 
 //Needs to read in text files as input instead of hardcoded puzzles
