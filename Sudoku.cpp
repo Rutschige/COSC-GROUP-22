@@ -100,6 +100,7 @@ bool isSolved(int mat[9][9])
 // This part was done be Amanda Foster
 void printSudoku(int mat[9][9])
 {
+	cout << " ___________________________________" << endl;
 	for (int i = 0; i <= 8; i++)
 	{
 		for (int j = 0; j <= 8; j++)
