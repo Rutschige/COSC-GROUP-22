@@ -107,6 +107,7 @@ void printSudoku(int mat[9][9])
 //Needs to read in text files as input instead of hardcoded puzzles
 void main()
 {
+	//Reading from text portion by Edgar Garza
 	ifstream inFile;
 
 	inFile.open("samplesudoku1.txt");
@@ -138,7 +139,7 @@ void main()
 	{
 		for (int j = 0; j < col; j++)
 		{
-			cout << puzzTxt[i][j];
+			cout << puzzTxt[i][j] << " ";
 		}
 		cout << endl;
 	}
