@@ -3,7 +3,7 @@
 #include <cstdio>
 #include <cstring>
 #include <cstdlib>
-using namespace std; 
+using namespace std;
 
 const int col = 9;
 const int row = 9;
@@ -12,8 +12,8 @@ const int row = 9;
 //This method searches for any empty spots in the puzzle
 bool foundEmpty(int mat[9][9], int &row, int &col)
 {
-	for ( row = 0; row < 9; row++) {
-		for ( col = 0; col < 9; col++) {
+	for (row = 0; row < 9; row++) {
+		for (col = 0; col < 9; col++) {
 			if (mat[row][col] == 0) {
 				return true;
 			}
@@ -65,7 +65,7 @@ bool isLegal(int mat[9][9], int row, int col, int check)
 	{
 		return false;
 	}
-	else 
+	else
 	{
 		return true;
 	}
@@ -100,41 +100,77 @@ bool isSolved(int mat[9][9])
 // This part was done be Amanda Foster
 void printSudoku(int mat[9][9])
 {
-	cout << " ___________________________________" << endl;
+	system("color F0");
+	cout << " _______________________________________" << endl;
 	for (int i = 0; i <= 8; i++)
 	{
 		for (int j = 0; j <= 8; j++)
 		{
-			
-			cout << "|   " ;
-			
-		}
-		cout << "|" << endl;
-		
-		for (int j = 0; j <= 8; j++)
-		{
-			if(mat[i][j] == 0)
-			{
+			if (j % 3 == 0) {
+				cout << "||   ";
+			}
+			else {
 				cout << "|   ";
 			}
-			else
-			{
-			cout << "| " << mat[i][j] << " ";
-			}
 
 		}
-	
-		
-		cout<< "|" << endl;
+
+		cout << "||" << endl;
 
 		for (int j = 0; j <= 8; j++)
 		{
-			system("color F0");
-			cout << "|___";
+			if (j % 3 == 0) {
+				if (mat[i][j] == 0)
+				{
+					cout << "||   ";
+				}
+				else
+				{
+					cout << "|| " << mat[i][j] << " ";
+				}
+			}
+			else {
+				if (mat[i][j] == 0)
+				{
+					cout << "|   ";
+				}
+				else
+				{
+					cout << "| " << mat[i][j] << " ";
+				}
+			}
+
+
 
 		}
-		
-		cout << "|" << endl;
+		cout << "||" << endl;
+
+		for (int x = 0; x <= 8; x++)
+		{
+
+			if (x % 3 == 0) {
+				if (i == 2 || i == 5) {
+					cout << "||===";
+
+				}
+				else {
+					cout << "||___";
+				}
+			}
+
+			else {
+				if (i == 2 || i == 5) {
+					cout << "|===";
+
+				}
+				else {
+					cout << "|___";
+				}
+			}
+
+
+		}
+		cout << "||" << endl;
 
 	}
 }
@@ -164,10 +200,21 @@ void main()
 			{
 				inFile >> puzzTxt[i][j];
 			}
-				
+
 		}
 	}
-	
+
+	/*
+	//Prints the text file 9x9
+	for (int i = 0; i < row; i++)
+	{
+	for (int j = 0; j < col; j++)
+	{
+	cout << puzzTxt[i][j] << " ";
+	}
+	cout << endl;
+	}*/
+
 	//prints before being solved
 	printSudoku(puzzTxt);
 	cout << endl;
@@ -180,8 +227,5 @@ void main()
 	{
 		cout << "No Solution" << endl;
 	}
-	
-	inFile.close();
-	
-	system("pause");	
+	system("pause");
 }
