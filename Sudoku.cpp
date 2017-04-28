@@ -3,6 +3,7 @@
 #include <cstdio>
 #include <cstring>
 #include <cstdlib>
+#include <windows.h>
 using namespace std;
 
 const int col = 9;
@@ -98,9 +99,14 @@ bool isSolved(int mat[9][9])
 }
 
 // This part was done be Amanda Foster
-void printSudoku(int mat[9][9])
+void printSudoku(int mat[9][9], int check[9][9])
 {
 	system("color F0");
+	int black = 0; int white = 15; int green = 2;
+	HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
+	WORD dColor = ((white & 0x0F) << 4) + (black & 0x0F);
+	WORD gColor = ((white & 0x0F) << 4) + (green & 0x0F);
+	SetConsoleTextAttribute(h, dColor);
 	cout << " _______________________________________" << endl;
 	for (int i = 0; i <= 8; i++)
 	{
@@ -119,29 +125,63 @@ void printSudoku(int mat[9][9])
 
 		for (int j = 0; j <= 8; j++)
 		{
-			if (j % 3 == 0) {
-				if (mat[i][j] == 0)
-				{
-					cout << "||   ";
+			if (mat[i][j] != check[i][j]) 
+			{
+				if (j % 3 == 0) {
+					if (mat[i][j] == 0)
+					{
+						cout << "||   ";
+					}
+					else
+					{
+						cout << "|| ";
+						SetConsoleTextAttribute(h, gColor);
+						cout << mat[i][j] << " ";
+						SetConsoleTextAttribute(h, dColor);
+					}
 				}
-				else
-				{
-					cout << "|| " << mat[i][j] << " ";
+				else {
+					if (mat[i][j] == 0)
+					{
+						cout << "|   ";
+					}
+					else
+					{
+						cout << "| ";
+						SetConsoleTextAttribute(h, gColor);
+						cout << mat[i][j] << " ";
+						SetConsoleTextAttribute(h, dColor);
+					}
+				}
+
+			}
+			else
+			{
+				if (j % 3 == 0) {
+					if (mat[i][j] == 0)
+					{
+						cout << "||   ";
+					}
+					else
+					{
+						cout << "|| ";
+						SetConsoleTextAttribute(h, dColor);
+						cout << mat[i][j] << " ";
+					}
+				}
+				else {
+					if (mat[i][j] == 0)
+					{
+						cout << "|   ";
+					}
+					else
+					{
+						cout << "| ";
+						SetConsoleTextAttribute(h, dColor);
+						cout << mat[i][j] << " ";
+					}
 				}
 			}
-			else {
-				if (mat[i][j] == 0)
-				{
-					cout << "|   ";
-				}
-				else
-				{
-					cout << "| " << mat[i][j] << " ";
-				}
-			}
-
-
-
 		}
 		cout << "||" << endl;
 
@@ -179,6 +219,7 @@ void main()
 {
 	//Reading from text portion by Edgar Garza
 	ifstream inFile;
+	int a;
 
 	inFile.open("samplesudoku1.txt");
 
@@ -190,6 +231,7 @@ void main()
 	}
 
 	int puzzTxt[row][col];
+	int temp[row][col];
 
 	//Loop through the file
 	while (!inFile.eof())
@@ -199,33 +241,23 @@ void main()
 			for (int j = 0; j < col; j++)
 			{
 				inFile >> puzzTxt[i][j];
+				temp[i][j] = puzzTxt[i][j];
 			}
 
 		}
 	}
-
-	/*
-	//Prints the text file 9x9
-	for (int i = 0; i < row; i++)
-	{
-	for (int j = 0; j < col; j++)
-	{
-	cout << puzzTxt[i][j] << " ";
-	}
-	cout << endl;
-	}*/
-
-	//prints before being solved
-	printSudoku(puzzTxt);
+	cout << "Unsolved Puzzle: " << endl;
+	printSudoku(puzzTxt, temp);
 	cout << endl;
 
 	if (isSolved(puzzTxt) == true)
 	{
-		printSudoku(puzzTxt);
+		cout << "Solved Puzzle: " << endl;;
+		printSudoku(puzzTxt, temp);
 	}
 	else
 	{
 		cout << "No Solution" << endl;
 	}
-	system("pause");
+	cin >> a;
 }
