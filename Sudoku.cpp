@@ -100,13 +100,14 @@ bool isSolved(int mat[9][9])
 }
 
 //Allows user to pick the color of the solved portion of the puzzle
+//This method by Grant Williams
 int getColor()
 {
 	string txtColor;
 	cout << "Pick a color for the solved numbers, any color: " << endl;
-	cout << "1 for Blue \n" << "2 for Green \n" << "3 for Cyan \n" << "4 for Red \n" << "5 for Magenta \n" << "6 for Brown \n" 
-		 << "7 for Light Gray \n" << "8 for Dark Gray \n" << "9 for Light Blue \n" << "10 for Light Green \n" << "11 for Light Cyan \n" 
-		 << "12 for Light Red \n" << "13 for Light Magenta \n" << endl;
+	cout << "1 for Blue \n" << "2 for Green \n" << "3 for Cyan \n" << "4 for Red \n" << "5 for Magenta \n" << "6 for Brown \n"
+		<< "7 for Light Gray \n" << "8 for Dark Gray \n" << "9 for Light Blue \n" << "10 for Light Green \n" << "11 for Light Cyan \n"
+		<< "12 for Light Red \n" << "13 for Light Magenta \n" << endl;
 	getline(cin, txtColor);
 	if (txtColor == "1") {
 		cout << "Blue huh? Okay well if you say so... \n";
@@ -161,7 +162,7 @@ int getColor()
 		return 13;
 	}
 	else {
-		cout << "That's not an option sorry... " << endl;
+		cout << "That's not an option sorry... \n";
 		return 0;
 	}
 }
@@ -283,9 +284,9 @@ void printSudoku(int mat[9][9], int check[9][9], int color)
 	cout << endl;
 }
 
+//Reading from text portion by Edgar Garza
 void readInPuzz(string file, int puzz[9][9], int puzzTemp[9][9])
 {
-	//Reading from text portion by Edgar Garza
 	//Puzzle in
 	ifstream inFile;
 	inFile.open(file);
@@ -316,81 +317,28 @@ void main()
 {
 	int a;
 	system("color F0");
-	
-	//Puzzle 1
-	int puzz1[row][col];
+
+	int puzz[row][col];
 	int temp[row][col];
-	int color = getColor();
-	readInPuzz("samplesudoku1.txt", puzz1, temp);
-	cout << "Unsolved Puzzle 1: " << endl;
-	printSudoku(puzz1, temp, color);
-	cout << endl;
+	int color;
+	for (int fileNum = 1; fileNum <= 4; fileNum++)
+	{
+		color = getColor();
+		string fileName = "samplesudoku" + to_string(fileNum) + ".txt";
+		readInPuzz(fileName, puzz, temp);
+		cout << "Unsolved Puzzle " + to_string(fileNum) + ": " << endl;
+		printSudoku(puzz, temp, color);
+		cout << endl;
 
-	if (isSolved(puzz1) == true)
-	{
-		cout << "Solved Puzzle 1: " << endl;
-		printSudoku(puzz1, temp, color);
-	}
-	else
-	{
-		cout << "No Solution" << endl;
-	}
-	
-	//Puzzle 2
-	int puzz2[row][col];
-	int temp2[row][col];
-	color = getColor();
-	readInPuzz("samplesudoku2.txt", puzz2, temp2);
-	cout << "Unsolved Puzzle 2: " << endl;
-	printSudoku(puzz2, temp2, color);
-	cout << endl;
-
-	if (isSolved(puzz2) == true)
-	{
-		cout << "Solved Puzzle 2: " << endl;
-		printSudoku(puzz2, temp2, color);
-	}
-	else
-	{
-		cout << "No Solution" << endl;
-	}
-
-	//Puzzle 3
-	int puzz3[row][col];
-	int temp3[row][col];
-	color = getColor();
-	readInPuzz("samplesudoku3.txt", puzz3, temp3);
-	cout << "Unsolved Puzzle 3: " << endl;
-	printSudoku(puzz3, temp3, color);
-	cout << endl;
-
-	if (isSolved(puzz3) == true)
-	{
-		cout << "Solved Puzzle 3: " << endl;
-		printSudoku(puzz3, temp3, color);
-	}
-	else
-	{
-		cout << "No Solution" << endl;
-	}
-
-	//Puzzle 4
-	int puzz4[row][col];
-	int temp4[row][col];
-	color = getColor();
-	readInPuzz("samplesudoku4.txt", puzz4, temp4);
-	cout << "Unsolved Puzzle 4: " << endl;
-	printSudoku(puzz4, temp4, color);
-	cout << endl;
-
-	if (isSolved(puzz4) == true)
-	{
-		cout << "Solved Puzzle 4: " << endl;
-		printSudoku(puzz4, temp4, color);
-	}
-	else
-	{
-		cout << "No Solution" << endl;
+		if (isSolved(puzz) == true)
+		{
+			cout << "Solved Puzzle " + to_string(fileNum) + ": " << endl;
+			printSudoku(puzz, temp, color);
+		}
+		else
+		{
+			cout << "No Solution" << endl;
+		}
 	}
 
 	cin >> a;
