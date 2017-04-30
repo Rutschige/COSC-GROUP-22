@@ -133,27 +133,27 @@ int getColor()
 		return 6;
 	}
 	else if (txtColor == "7") {
-		cout << "Light gray huh? Okay well if you say so... \n";
+		cout << "Light Gray huh? Okay well if you say so... \n";
 		return 7;
 	}
 	else if (txtColor == "8") {
-		cout << "Dark gray huh? Okay well if you say so... \n";
+		cout << "Dark Gray huh? Okay well if you say so... \n";
 		return 8;
 	}
 	else if (txtColor == "9") {
-		cout << "Light blue huh? Okay well if you say so... \n";
+		cout << "Light Blue huh? Okay well if you say so... \n";
 		return 9;
 	}
 	else if (txtColor == "10") {
-		cout << "Light green huh? Okay well if you say so... \n";
+		cout << "Light Green huh? Okay well if you say so... \n";
 		return 10;
 	}
 	else if (txtColor == "11") {
-		cout << "Light cyan huh? Okay well if you say so... \n";
+		cout << "Light Cyan huh? Okay well if you say so... \n";
 		return 11;
 	}
 	else if (txtColor == "12") {
-		cout << "Light red huh? Okay well if you say so... \n";
+		cout << "Light Red huh? Okay well if you say so... \n";
 		return 12;
 	}
 	else if (txtColor == "13") {
