@@ -2,6 +2,7 @@
 #include <fstream>
 #include <cstdio>
 #include <cstring>
+#include <string>
 #include <cstdlib>
 #include <windows.h>
 using namespace std;
@@ -98,14 +99,81 @@ bool isSolved(int mat[9][9])
 	return false;
 }
 
-// This part was done be Amanda Foster
-void printSudoku(int mat[9][9], int check[9][9])
+//Allows user to pick the color of the solved portion of the puzzle
+int getColor()
 {
-	system("color F0");
-	int black = 0; int white = 15; int green = 2;
+	string txtColor;
+	cout << "Pick a color for the solved numbers, any color: " << endl;
+	cout << "1 for Blue \n" << "2 for Green \n" << "3 for Cyan \n" << "4 for Red \n" << "5 for Magenta \n" << "6 for Brown \n" 
+		 << "7 for Light Gray \n" << "8 for Dark Gray \n" << "9 for Light Blue \n" << "10 for Light Green \n" << "11 for Light Cyan \n" 
+		 << "12 for Light Red \n" << "13 for Light Magenta \n" << endl;
+	getline(cin, txtColor);
+	if (txtColor == "1") {
+		cout << "Blue huh? Okay well if you say so... \n";
+		return 1;
+	}
+	else if (txtColor == "2") {
+		cout << "Green huh? Okay well if you say so... \n";
+		return 2;
+	}
+	else if (txtColor == "3") {
+		cout << "Cyan huh? Okay well if you say so... \n";
+		return 3;
+	}
+	else if (txtColor == "4") {
+		cout << "Red huh? Okay well if you say so... \n";
+		return 4;
+	}
+	else if (txtColor == "5") {
+		cout << "Magenta huh? Okay well if you say so... \n";
+		return 5;
+	}
+	else if (txtColor == "6") {
+		cout << "Brown huh? Okay well if you say so... \n";
+		return 6;
+	}
+	else if (txtColor == "7") {
+		cout << "Light gray huh? Okay well if you say so... \n";
+		return 7;
+	}
+	else if (txtColor == "8") {
+		cout << "Dark gray huh? Okay well if you say so... \n";
+		return 8;
+	}
+	else if (txtColor == "9") {
+		cout << "Light blue huh? Okay well if you say so... \n";
+		return 9;
+	}
+	else if (txtColor == "10") {
+		cout << "Light green huh? Okay well if you say so... \n";
+		return 10;
+	}
+	else if (txtColor == "11") {
+		cout << "Light cyan huh? Okay well if you say so... \n";
+		return 11;
+	}
+	else if (txtColor == "12") {
+		cout << "Light red huh? Okay well if you say so... \n";
+		return 12;
+	}
+	else if (txtColor == "13") {
+		cout << "Light Magenta huh? Okay well if you say so... \n";
+		return 13;
+	}
+	else {
+		cout << "That's not an option sorry... " << endl;
+		return 0;
+	}
+}
+
+// Printing the gamebord and reading numbers into the board by Amanda Foster
+//Adding color by Grant Williams
+void printSudoku(int mat[9][9], int check[9][9], int color)
+{
+	int foreG = 0; int backG = 15; int alt = color;
 	HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
-	WORD dColor = ((white & 0x0F) << 4) + (black & 0x0F);
-	WORD gColor = ((white & 0x0F) << 4) + (green & 0x0F);
+	WORD dColor = ((backG & 0x0F) << 4) + (foreG & 0x0F);
+	WORD aColor = ((backG & 0x0F) << 4) + (alt & 0x0F);
 	SetConsoleTextAttribute(h, dColor);
 	cout << " _______________________________________" << endl;
 	for (int i = 0; i <= 8; i++)
@@ -125,7 +193,7 @@ void printSudoku(int mat[9][9], int check[9][9])
 
 		for (int j = 0; j <= 8; j++)
 		{
-			if (mat[i][j] != check[i][j]) 
+			if (mat[i][j] != check[i][j])
 			{
 				if (j % 3 == 0) {
 					if (mat[i][j] == 0)
@@ -135,7 +203,7 @@ void printSudoku(int mat[9][9], int check[9][9])
 					else
 					{
 						cout << "|| ";
-						SetConsoleTextAttribute(h, gColor);
+						SetConsoleTextAttribute(h, aColor);
 						cout << mat[i][j] << " ";
 						SetConsoleTextAttribute(h, dColor);
 					}
@@ -148,7 +216,7 @@ void printSudoku(int mat[9][9], int check[9][9])
 					else
 					{
 						cout << "| ";
-						SetConsoleTextAttribute(h, gColor);
+						SetConsoleTextAttribute(h, aColor);
 						cout << mat[i][j] << " ";
 						SetConsoleTextAttribute(h, dColor);
 					}
@@ -211,17 +279,16 @@ void printSudoku(int mat[9][9], int check[9][9])
 
 		}
 		cout << "||" << endl;
-
 	}
+	cout << endl;
 }
 
-void main()
+void readInPuzz(string file, int puzz[9][9], int puzzTemp[9][9])
 {
 	//Reading from text portion by Edgar Garza
+	//Puzzle in
 	ifstream inFile;
-	int a;
-
-	inFile.open("samplesudoku1.txt");
+	inFile.open(file);
 
 	//Check for error
 	if (inFile.fail())
@@ -230,9 +297,6 @@ void main()
 		exit(1);
 	}
 
-	int puzzTxt[row][col];
-	int temp[row][col];
-
 	//Loop through the file
 	while (!inFile.eof())
 	{
@@ -240,24 +304,94 @@ void main()
 		{
 			for (int j = 0; j < col; j++)
 			{
-				inFile >> puzzTxt[i][j];
-				temp[i][j] = puzzTxt[i][j];
+				inFile >> puzz[i][j];
+				puzzTemp[i][j] = puzz[i][j];
 			}
 
 		}
 	}
-	cout << "Unsolved Puzzle: " << endl;
-	printSudoku(puzzTxt, temp);
+}
+
+void main()
+{
+	int a;
+	system("color F0");
+	
+	//Puzzle 1
+	int puzz1[row][col];
+	int temp[row][col];
+	int color = getColor();
+	readInPuzz("samplesudoku1.txt", puzz1, temp);
+	cout << "Unsolved Puzzle 1: " << endl;
+	printSudoku(puzz1, temp, color);
 	cout << endl;
 
-	if (isSolved(puzzTxt) == true)
+	if (isSolved(puzz1) == true)
 	{
-		cout << "Solved Puzzle: " << endl;;
-		printSudoku(puzzTxt, temp);
+		cout << "Solved Puzzle 1: " << endl;
+		printSudoku(puzz1, temp, color);
 	}
 	else
 	{
 		cout << "No Solution" << endl;
 	}
+	
+	//Puzzle 2
+	int puzz2[row][col];
+	int temp2[row][col];
+	color = getColor();
+	readInPuzz("samplesudoku2.txt", puzz2, temp2);
+	cout << "Unsolved Puzzle 2: " << endl;
+	printSudoku(puzz2, temp2, color);
+	cout << endl;
+
+	if (isSolved(puzz2) == true)
+	{
+		cout << "Solved Puzzle 2: " << endl;
+		printSudoku(puzz2, temp2, color);
+	}
+	else
+	{
+		cout << "No Solution" << endl;
+	}
+
+	//Puzzle 3
+	int puzz3[row][col];
+	int temp3[row][col];
+	color = getColor();
+	readInPuzz("samplesudoku3.txt", puzz3, temp3);
+	cout << "Unsolved Puzzle 3: " << endl;
+	printSudoku(puzz3, temp3, color);
+	cout << endl;
+
+	if (isSolved(puzz3) == true)
+	{
+		cout << "Solved Puzzle 3: " << endl;
+		printSudoku(puzz3, temp3, color);
+	}
+	else
+	{
+		cout << "No Solution" << endl;
+	}
+
+	//Puzzle 4
+	int puzz4[row][col];
+	int temp4[row][col];
+	color = getColor();
+	readInPuzz("samplesudoku4.txt", puzz4, temp4);
+	cout << "Unsolved Puzzle 4: " << endl;
+	printSudoku(puzz4, temp4, color);
+	cout << endl;
+
+	if (isSolved(puzz4) == true)
+	{
+		cout << "Solved Puzzle 4: " << endl;
+		printSudoku(puzz4, temp4, color);
+	}
+	else
+	{
+		cout << "No Solution" << endl;
+	}
+
 	cin >> a;
 }
