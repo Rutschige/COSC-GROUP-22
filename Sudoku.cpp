@@ -162,7 +162,7 @@ int getColor()
 		return 13;
 	}
 	else {
-		cout << "That's not an option sorry... \n";
+		cout << "That's not an option so I will pick for you, sorry... \n";
 		return 0;
 	}
 }
