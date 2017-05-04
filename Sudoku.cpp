@@ -174,7 +174,7 @@ int getColor()
 int setBackColor()
 {
 	string backMode;
-	int backColor;
+	int backColor = 15;
 	cout << "Would you like to switch to a dark background?...\n";
 	cout << "CAUTION: Certain color combinations are better than others \n";
 	cout << "Y/N \n";
@@ -346,10 +346,43 @@ void readInPuzz(string file, int puzz[9][9], int puzzTemp[9][9])
 	}
 }
 
+//Prints before anything else
+void printASCII()
+{
+	cout << endl;
+	string z = "    * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  "; cout << z << endl;
+	string a = "   * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * "; cout << a << endl;
+	string b = "  *                                                                        *"; cout << b << endl;
+	string c = " * *                                                                      * *"; cout << c << endl;
+	string d = " * *                                                                      * *"; cout << d << endl;
+	string e = " * *    _____                     _____       _    ___    ___  ___  ___   * *"; cout << e << endl;
+	string f = " * *   |     | ___  _____  ___   |   __| ___ |_|  |_  |  | | ||_  ||   |  * *"; cout << f << endl;
+	string g = " * *   |   --|| . ||     || . |  |__   ||  _|| |   _| |_ |_  ||_  || | |  * *"; cout << g << endl;
+	string h = " * *   |_____||___||_|_|_||  _|  |_____||___||_|  |_____|  |_||___||___|  * *"; cout << h << endl;
+	string i = " * *                                                                      * *"; cout << i << endl;
+	string j = " * *                _____                        ___  ___                 * *"; cout << j << endl;
+	string k = " * *               |   __| ___  ___  _ _  ___   |_  ||_  |                * *"; cout << k << endl;
+	string l = " * *               |  |  ||  _|| . || | || . |  |  _||  _|                * *"; cout << l << endl;
+	string m = " * *               |_____||_|  |___||___||  _|  |___||___|                * *"; cout << m << endl;
+	string n = " * *                                     |_|                              * *"; cout << n << endl;
+	string o = " * *                                                                      * *"; cout << o << endl;
+	string p = " * *                    _____         _       _                           * *"; cout << p << endl;
+	string q = " * *                   |   __| _ _  _| | ___ | |_  _ _                    * *"; cout << q << endl;
+	string r = " * *                   |__   || | || . || . || '_|| | |                   * *"; cout << r << endl;
+	string s = " * *                   |_____||___||___||___||_,_||___|                   * *"; cout << s << endl;
+	string t = " * *                                                                      * *"; cout << t << endl;
+	string u = " * *                                                                      * *"; cout << u << endl;
+	string v = "  * *                                                                    * *"; cout << v << endl;
+	string w = "   * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * "; cout << w << endl;
+	string x = "    * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *  "; cout << x << endl;
+}
+
 void main()
 {
 	int a;
 	system("color F0");
+
+	printASCII();
 
 	int backColor;
 	int frontColor;
