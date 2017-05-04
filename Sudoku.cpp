@@ -5,6 +5,7 @@
 #include <string>
 #include <cstdlib>
 #include <windows.h>
+#include<time.h>
 using namespace std;
 
 const int col = 9;
@@ -104,7 +105,7 @@ bool isSolved(int mat[9][9])
 int getColor()
 {
 	string txtColor;
-	cout << "Pick a color for the solved numbers, any color: " << endl;
+	cout << "Pick a text color for the solved numbers, any color: " << endl;
 	cout << "1 for Blue \n" << "2 for Green \n" << "3 for Cyan \n" << "4 for Red \n" << "5 for Magenta \n" << "6 for Brown \n"
 		<< "7 for Light Gray \n" << "8 for Dark Gray \n" << "9 for Light Blue \n" << "10 for Light Green \n" << "11 for Light Cyan \n"
 		<< "12 for Light Red \n" << "13 for Light Magenta \n" << endl;
@@ -163,15 +164,47 @@ int getColor()
 	}
 	else {
 		cout << "That is not an option so I will pick for you... \n";
-		return 0;
+		srand(time(0));
+		return (rand() % 14 + 1);
 	}
+}
+
+//This method has the user pick a background setting
+//By Grant Williams
+int setBackColor()
+{
+	string backMode;
+	int backColor;
+	cout << "Would you like to switch to a dark background?...\n";
+	cout << "CAUTION: Certain color combinations are better than others \n";
+	cout << "Y/N \n";
+	getline(cin, backMode);
+	if (backMode == "Y" || backMode == "y")
+	{
+		system("color 0F");
+		backColor = 0;
+		cout << "Dark it is then...\n";
+	}
+	else if (backMode == "N" || backMode == "n")
+	{
+		system("color F0");
+		backColor = 15;
+		cout << "Light it is then...\n";
+	}
+	else
+	{
+		system("color F0");
+		backColor = 15;
+		cout << "That's not an option...so light it will stay.\n";
+	}
+	return backColor;
 }
 
 // Printing the gamebord and reading numbers into the board by Amanda Foster
 //Adding color by Grant Williams
-void printSudoku(int mat[9][9], int check[9][9], int color)
+void printSudoku(int mat[9][9], int check[9][9], int color, int backColor, int frontColor)
 {
-	int foreG = 0; int backG = 15; int alt = color;
+	int foreG = frontColor; int backG = backColor; int alt = color;
 	HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
 	WORD dColor = ((backG & 0x0F) << 4) + (foreG & 0x0F);
 	WORD aColor = ((backG & 0x0F) << 4) + (alt & 0x0F);
@@ -318,22 +351,36 @@ void main()
 	int a;
 	system("color F0");
 
+	int backColor;
+	int frontColor;
+
+	if (setBackColor() == 0)
+	{
+		backColor = 0;
+		frontColor = 15;
+	}
+	else
+	{
+		backColor = 15;
+		frontColor = 0;
+	}
+
 	int puzz[row][col];
 	int temp[row][col];
-	int color;
+	int textColor;
 	for (int fileNum = 1; fileNum <= 4; fileNum++)
 	{
-		color = getColor();
+		textColor = getColor();
 		string fileName = "samplesudoku" + to_string(fileNum) + ".txt";
 		readInPuzz(fileName, puzz, temp);
 		cout << "Unsolved Puzzle " + to_string(fileNum) + ": " << endl;
-		printSudoku(puzz, temp, color);
+		printSudoku(puzz, temp, textColor, backColor, frontColor);
 		cout << endl;
 
 		if (isSolved(puzz) == true)
 		{
 			cout << "Solved Puzzle " + to_string(fileNum) + ": " << endl;
-			printSudoku(puzz, temp, color);
+			printSudoku(puzz, temp, textColor, backColor, frontColor);
 		}
 		else
 		{
